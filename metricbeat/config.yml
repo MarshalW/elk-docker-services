@@ -1,0 +1,55 @@
+metricbeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+metricbeat.modules:
+  - module: docker
+    metricsets:
+      - "container"
+      - "cpu"
+      - "diskio"
+      - "healthcheck"
+      - "info"
+      #- "image"
+      - "memory"
+      - "network"
+    hosts: ["unix:///var/run/docker.sock"]
+    period: 10s
+  - module: system
+    metricsets:
+      - "cpu"
+      - "load"
+      - "memory"
+      - "network"
+      - "process"
+      - "process_summary"
+    #   - "core"
+    #   - "diskio"
+    #   - "socket"
+    processes: [".*"]
+    process.include_top_n:
+      by_cpu: 5
+      by_memory: 5
+    period: 10s
+    cpu.metrics: ["percentages"]
+    core.metrics: ["percentages"]
+
+processors:
+  #     - add_cloud_metadata: ~
+  - add_docker_metadata:
+      host: "unix:///var/run/docker.sock"
+
+setup.dashboards:
+  enabled: true
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+
+output.elasticsearch:
+  hosts: "${ELASTICSEARCH_HOST}"
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+# https://github.com/shazChaudhry/docker-elastic/blob/master/elk/beats/metricbeat/config/metricbeat.yml
