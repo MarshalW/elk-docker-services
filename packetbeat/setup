@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source ./.env
+
+docker run \
+--cap-add=NET_ADMIN \
+--network=host \
+docker.elastic.co/beats/packetbeat:$ELK_VERSION \
+setup -E setup.kibana.host=localhost:5601z \
+-E setup.kibana.username=$ELASTIC_USER \
+-E setup.kibana.password=$ELASTIC_PASSWORD \
+-E output.elasticsearch.hosts=["localhost:9200"] \
+-E output.elasticsearch.username=$ELASTIC_USER \
+-E output.elasticsearch.password=$ELASTIC_PASSWORD
