@@ -49,7 +49,7 @@ setup.kibana:
   password: ${ELASTICSEARCH_PASSWORD}
 
 output.elasticsearch:
-  hosts: "${ELASTICSEARCH_HOST}"
+  hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
 # https://github.com/shazChaudhry/docker-elastic/blob/master/elk/beats/metricbeat/config/metricbeat.yml
