@@ -21,23 +21,23 @@
 #   password: $ELASTICSEARCH_PASSWORD
 
 filebeat.autodiscover:
-    providers:
-      - type: docker
-        templates:
-          - condition:
-              contains:
-                docker.container.image: nginx
-            config:
-              - type: container
-                paths:
-                  - /var/lib/docker/containers/${data.docker.container.id}/*.log
-  
-  output.elasticsearch:
-    hosts: ["localhost:9200"]
-    username: "elastic"
-    password: "password"
-  
-  setup.kibana:
-    host: "localhost:5601"
-    username: "elastic"
-    password: "password"
+  providers:
+    - type: docker
+      templates:
+        - condition:
+            contains:
+              docker.container.image: nginx
+          config:
+            - type: container
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  username: "elastic"
+  password: "password"
+
+setup.kibana:
+  host: "localhost:5601"
+  username: "elastic"
+  password: "password"
