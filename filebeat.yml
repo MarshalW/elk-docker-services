@@ -15,3 +15,7 @@ services:
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     command: ["--strict.perms=false"]
+
+networks:
+  default:
+    name: $DEFAULT_NETWORK
