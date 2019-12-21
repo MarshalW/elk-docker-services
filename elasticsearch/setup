@@ -1,9 +1,0 @@
-#! /usr/bin/env bash
-
-WORKING_DIR="./data"
-if [ -d $WORKING_DIR ]; then rm -Rf $WORKING_DIR && echo "The directory $WORKING_DIR is removed."; fi
-
-echo "Create $WORKING_DIR"
-mkdir $WORKING_DIR
-chmod g+rwx $WORKING_DIR
-chgrp 1000 $WORKING_DIR
