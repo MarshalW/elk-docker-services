@@ -24,6 +24,14 @@ packetbeat.protocols.mongodb:
 # processors:
 #   - add_cloud_metadata: ~
 
+setup.dashboards:
+  enabled: true
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
