@@ -33,7 +33,7 @@ filebeat.autodiscover:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
 
 output.elasticsearch:
-  hosts: [$ELASTICSEARCH_HOSTS]
+  hosts: ["$ELASTICSEARCH_HOSTS"]
   username: $ELASTICSEARCH_USERNAME
   password: $ELASTICSEARCH_PASSWORD
 
