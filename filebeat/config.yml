@@ -1,4 +1,7 @@
 filebeat:
+  filebeat.modules:
+    - module: nginx    
+    
   autodiscover.providers:
     - type: docker
       templates:
