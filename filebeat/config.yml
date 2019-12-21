@@ -1,21 +1,43 @@
+# filebeat.autodiscover:
+#   providers:
+#     - type: docker
+#       templates:
+#         - condition:
+#             contains:
+#               docker.container.image: nginx
+#           config:
+#             - type: container
+#               paths:
+#                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
+
+# output.elasticsearch:
+#   hosts: [$ELASTICSEARCH_HOSTS]
+#   username: $ELASTICSEARCH_USERNAME
+#   password: $ELASTICSEARCH_PASSWORD
+
+# setup.kibana:
+#   host: $KIBANA_HOST
+#   username: $ELASTICSEARCH_USERNAME
+#   password: $ELASTICSEARCH_PASSWORD
+
 filebeat.autodiscover:
-  providers:
-    - type: docker
-      templates:
-        - condition:
-            contains:
-              docker.container.image: nginx
-          config:
-            - type: container
-              paths:
-                - /var/lib/docker/containers/${data.docker.container.id}/*.log
-
-output.elasticsearch:
-  hosts: [$ELASTICSEARCH_HOSTS]
-  username: $ELASTICSEARCH_USERNAME
-  password: $ELASTICSEARCH_PASSWORD
-
-setup.kibana:
-  host: $KIBANA_HOST
-  username: $ELASTICSEARCH_USERNAME
-  password: $ELASTICSEARCH_PASSWORD
+    providers:
+      - type: docker
+        templates:
+          - condition:
+              contains:
+                docker.container.image: nginx
+            config:
+              - type: container
+                paths:
+                  - /var/lib/docker/containers/${data.docker.container.id}/*.log
+  
+  output.elasticsearch:
+    hosts: ["localhost:9200"]
+    username: "elastic"
+    password: "password"
+  
+  setup.kibana:
+    host: "localhost:5601"
+    username: "elastic"
+    password: "password"
