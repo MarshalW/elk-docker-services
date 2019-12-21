@@ -33,11 +33,11 @@ filebeat.autodiscover:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
 
 output.elasticsearch:
-  hosts: ["$ELASTICSEARCH_HOSTS"]
-  username: $ELASTICSEARCH_USERNAME
-  password: $ELASTICSEARCH_PASSWORD
+  hosts: ["localhost:9200"]
+  username: "elastic"
+  password: "password"
 
 setup.kibana:
-  host: $KIBANA_HOST
-  username: $ELASTICSEARCH_USERNAME
-  password: $ELASTICSEARCH_PASSWORD
+  host: "localhost:5601"
+  username: "elastic"
+  password: "password"
