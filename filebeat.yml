@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  packetbeat:
+    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat/config.yml:/usr/share/packetbeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ELASTICSEARCH_HOSTS: elasticsearch:9200
+      KIBANA_HOST: kibana:5601
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    command: ["--strict.perms=false"]
