@@ -32,8 +32,8 @@ filebeat:
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
 
-  modules:
-    - module: nginx
+#   modules:
+#     - module: nginx
 
 output.elasticsearch:
   hosts: ["localhost:9200"]
