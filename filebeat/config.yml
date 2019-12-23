@@ -44,3 +44,6 @@ setup.kibana:
   host: "localhost:5601"
   username: "elastic"
   password: "password"
+
+setup.dashboards:
+  enabled: true
