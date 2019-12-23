@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  packetbeat:
+  filebeat:
     image: docker.elastic.co/beats/filebeat:$ELK_VERSION
     container_name: filebeat
     user: root
