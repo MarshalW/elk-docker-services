@@ -20,8 +20,8 @@
 #   username: $ELASTICSEARCH_USERNAME
 #   password: $ELASTICSEARCH_PASSWORD
 
-filebeat.autodiscover:
-  providers:
+filebeat:
+  autodiscover.providers:
     - type: docker
       templates:
         - condition:
@@ -32,8 +32,8 @@ filebeat.autodiscover:
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
 
-filebeat.modules:
-  - module: nginx
+  modules:
+    - module: nginx
 
 output.elasticsearch:
   hosts: ["localhost:9200"]
