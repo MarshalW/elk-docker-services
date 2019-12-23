@@ -32,6 +32,9 @@ filebeat.autodiscover:
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
 
+filebeat.modules:
+  - module: nginx
+
 output.elasticsearch:
   hosts: ["localhost:9200"]
   username: "elastic"
