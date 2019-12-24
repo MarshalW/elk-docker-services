@@ -1,14 +1,55 @@
+# filebeat:
+#   autodiscover.providers:
+#     - type: docker
+#       templates:
+#         - condition:
+#             contains:
+#               docker.container.image: nginx
+#           config:
+#             - type: container
+#               paths:
+#                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
+
+# output.elasticsearch:
+#   hosts: "${ELASTICSEARCH_HOSTS}"
+#   username: "${ELASTICSEARCH_USERNAME}"
+#   password: "${ELASTICSEARCH_PASSWORD}"
+
+# setup.kibana:
+#   host: "${KIBANA_HOST}"
+#   username: ${ELASTICSEARCH_USERNAME}
+#   password: ${ELASTICSEARCH_PASSWORD}
+
+# setup.dashboards:
+#   enabled: true
+
 filebeat:
   autodiscover.providers:
     - type: docker
       templates:
-        - condition:
-            contains:
-              docker.container.image: nginx
+        - condition.contains:
+            docker.container.image: nginx
           config:
-            - type: container
-              paths:
-                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+            - module: nginx
+              access:
+                enabled: true
+                input:
+                  type: container
+                  paths:
+                    - "/var/lib/docker/containers/${data.docker.container.id}/*.log"
+              error:
+                enabled: true
+                input:
+                  type: container
+                  paths:
+                    - "/var/lib/docker/containers/${data.docker.container.id}/*.log"
+
+# filebeat.config.modules:
+#   enabled: true
+#   path: ${path.config}/modules.d/*.yml
+
+setup.dashboards:
+  enabled: true
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
@@ -19,6 +60,3 @@ setup.kibana:
   host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
-
-setup.dashboards:
-  enabled: true
