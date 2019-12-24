@@ -19,3 +19,8 @@ setup.kibana:
   host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
+
+processors:
+  #     - add_cloud_metadata: ~
+  - add_docker_metadata:
+      host: "unix:///var/run/docker.sock"
