@@ -19,3 +19,6 @@ setup.kibana:
   host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
+
+setup.dashboards:
+  enabled: true
