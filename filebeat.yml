@@ -12,4 +12,4 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
     command: ["--strict.perms=false"]
     environment:
-      output.elasticsearch.hosts: ["localhost:9200"]
+      - output.elasticsearch.hosts=["localhost:9200"]
