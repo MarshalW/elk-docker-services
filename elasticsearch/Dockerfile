@@ -3,7 +3,7 @@ ARG ELK_VERSION
 
 FROM docker.elastic.co/elasticsearch/elasticsearch:${ELK_VERSION}
 
-ENV ELK_VERSION $ELK_VERSION
+# ENV ELK_VERSION $ELK_VERSION
 RUN echo '>>>>>>>> ${ELK_VERSION}' 
 
 # https://github.com/medcl/elasticsearch-analysis-ik/releases]
