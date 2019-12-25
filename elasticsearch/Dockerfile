@@ -1,4 +1,6 @@
 # https://github.com/elastic/elasticsearch-docker
+ARG ELK_VERSION=ELK_VERSION
+
 FROM docker.elastic.co/elasticsearch/elasticsearch:$ELK_VERSION
 
 ENV VERSION=$ELK_VERSION
