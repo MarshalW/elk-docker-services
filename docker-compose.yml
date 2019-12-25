@@ -37,6 +37,24 @@ services:
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
 
+  packetbeat:
+    image: docker.elastic.co/beats/packetbeat:$ELK_VERSION
+    container_name: packetbeat
+    user: root
+    network_mode: "host"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./packetbeat/config.yml:/usr/share/packetbeat/packetbeat.yml
+    environment:
+      ELASTICSEARCH_HOSTS: localhost:9200
+      KIBANA_HOST: localhost:5601
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    command: ["--strict.perms=false"]
+
 networks:
   default:
     name: $DEFAULT_NETWORK
