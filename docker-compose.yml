@@ -36,6 +36,8 @@ services:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    depends_on:
+      - elasticsearch
 
   packetbeat:
     image: docker.elastic.co/beats/packetbeat:$ELK_VERSION
@@ -54,6 +56,9 @@ services:
       - NET_RAW
       - NET_ADMIN
     command: ["--strict.perms=false"]
+    depends_on:
+      - elasticsearch
+      - kibana
 
 networks:
   default:
