@@ -41,7 +41,7 @@ services:
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     depends_on:
-      - elasticsearch
+      - elasticsearch: { condition: service_healthy }
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5601"]
       retries: 300
@@ -65,8 +65,8 @@ services:
       - NET_ADMIN
     command: ["--strict.perms=false"]
     depends_on:
-      - elasticsearch
-      - kibana
+      - elasticsearch: { condition: service_healthy }
+      - kibana: { condition: service_healthy }
     restart: on-failure
 
 networks:
