@@ -2,7 +2,8 @@ version: "3.7"
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:$ELK_VERSION
+    # image: docker.elastic.co/elasticsearch/elasticsearch:$ELK_VERSION
+    build: ./elasticsearch
     container_name: elasticsearch
     environment:
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD
