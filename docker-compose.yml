@@ -5,7 +5,7 @@ services:
     build:
       context: ./elasticsearch
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: 7.4.2
     container_name: elasticsearch
     environment:
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD
