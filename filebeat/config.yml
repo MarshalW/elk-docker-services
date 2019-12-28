@@ -24,3 +24,9 @@ output.file:
 #   host: "${KIBANA_HOST}"
 #   username: ${ELASTICSEARCH_USERNAME}
 #   password: ${ELASTICSEARCH_PASSWORD}
+
+processors:
+  - decode_json_fields:
+      fields: ["message"]
+      process_array: false
+      max_depth: 2
