@@ -87,14 +87,15 @@ services:
     image: docker.elastic.co/beats/filebeat:$ELK_VERSION
     container_name: filebeat
     user: root
+    network_mode: "host"
     volumes:
       - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./filebeat/log:/usr/share/filebeat/log
+      # - ./filebeat/log:/usr/share/filebeat/log
     environment:
-      ELASTICSEARCH_HOSTS: elasticsearch:9200
-      KIBANA_HOST: kibana:5601
+      ELASTICSEARCH_HOSTS: localhost:9200
+      KIBANA_HOST: localhost:5601
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     command: ["--strict.perms=false"]
