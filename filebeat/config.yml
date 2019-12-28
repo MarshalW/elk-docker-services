@@ -18,8 +18,8 @@ setup.dashboards:
 #   password: "${ELASTICSEARCH_PASSWORD}"
 
 output.file:
-  path: "/usr/share/filebeat/test.log"
-  filename: filebeat
+  path: "/usr/share/filebeat"
+  filename: test.log
 
 setup.kibana:
   host: "${KIBANA_HOST}"
