@@ -30,3 +30,7 @@ processors:
       fields: ["message"]
       process_array: false
       max_depth: 2
+
+setup.template:
+  name: "hiservice"
+  pattern: "hiservice-*"
