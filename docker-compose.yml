@@ -98,7 +98,7 @@ services:
       - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      # - ./filebeat/log:/usr/share/filebeat/log
+      - ./filebeat/log:/usr/share/filebeat/log
     environment:
       ELASTICSEARCH_HOSTS: localhost:9200
       KIBANA_HOST: localhost:5601
