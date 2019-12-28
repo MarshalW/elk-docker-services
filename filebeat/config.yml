@@ -9,29 +9,28 @@ filebeat:
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
 
-# setup.dashboards:
-#   enabled: true
-
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
-
-# output.file:
-#   path: "/usr/share/filebeat/log"
-#   filename: test.log
 
 setup.kibana:
   host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
 
+setup.dashboards:
+  enabled: true
+
 processors:
   - decode_json_fields:
       fields: ["message"]
       process_array: false
       max_depth: 2
+# output.file:
+#   path: "/usr/share/filebeat/log"
+#   filename: test.log
 
-setup.template:
-  name: "hiservice"
-  pattern: "hiservice-*"
+# setup.template:
+#   name: "hiservice"
+#   pattern: "hiservice-*"
