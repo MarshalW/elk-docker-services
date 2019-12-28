@@ -83,6 +83,12 @@ services:
       - elasticsearch
       - kibana
 
+  hi_service:
+    image: marshalw/hi-service
+    container_name: hi_service
+    ports:
+      - 8888:8888
+
 networks:
   default:
     name: $DEFAULT_NETWORK
