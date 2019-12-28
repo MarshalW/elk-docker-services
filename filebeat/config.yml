@@ -3,7 +3,7 @@ filebeat:
     - type: docker
       templates:
         - condition.contains:
-            docker.container.image: hi_service
+            docker.container.image: hi-service
           config:
             - type: container
               paths:
