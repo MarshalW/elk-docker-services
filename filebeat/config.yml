@@ -27,10 +27,10 @@ processors:
       fields: ["message"]
       process_array: false
       max_depth: 2
-# output.file:
-#   path: "/usr/share/filebeat/log"
-#   filename: test.log
 
+output.file:
+  path: "/usr/share/filebeat/log"
+  filename: test.log
 # setup.template:
 #   name: "hiservice"
 #   pattern: "hiservice-*"
