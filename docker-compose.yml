@@ -83,26 +83,26 @@ services:
       - elasticsearch
       - kibana
 
-    filebeat:
-      image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-      container_name: filebeat
-      user: root
-      volumes:
-        - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
-        - /var/lib/docker/containers:/var/lib/docker/containers:ro
-        - /var/run/docker.sock:/var/run/docker.sock:ro
-        - ./filebeat/test.log:/usr/share/filebeat/test.log
-      environment:
-        ELASTICSEARCH_HOSTS: elasticsearch:9200
-        KIBANA_HOST: kibana:5601
-        ELASTICSEARCH_USERNAME: $ELASTIC_USER
-        ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-      command: ["--strict.perms=false"]
-      restart: on-failure
-      depends_on:
-        - elasticsearch
-        - kibana
-        - hi_service
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./filebeat/test.log:/usr/share/filebeat/test.log
+    environment:
+      ELASTICSEARCH_HOSTS: elasticsearch:9200
+      KIBANA_HOST: kibana:5601
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    command: ["--strict.perms=false"]
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+      - kibana
+      - hi_service
 
   hi_service:
     image: marshalw/hi-service
