@@ -1,0 +1,27 @@
+filebeat:
+  autodiscover.providers:
+    - type: docker
+      templates:
+        - condition.contains:
+            docker.container.image: hi_service
+          config:
+            - type: container
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+
+setup.dashboards:
+  enabled: true
+
+# output.elasticsearch:
+#   hosts: "${ELASTICSEARCH_HOSTS}"
+#   username: "${ELASTICSEARCH_USERNAME}"
+#   password: "${ELASTICSEARCH_PASSWORD}"
+
+output.file:
+  path: "/usr/share/filebeat/test.log"
+  filename: filebeat
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
