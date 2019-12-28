@@ -1,6 +1,12 @@
 version: "3.7"
 
 services:
+  hi_service:
+    image: marshalw/hi-service
+    container_name: hi_service
+    ports:
+      - 8888:8888
+
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -98,18 +104,12 @@ services:
       KIBANA_HOST: localhost:5601
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    command: ["--strict.perms=false"]
+    command: ["--strict.perms=false", "-e"]
     restart: on-failure
     depends_on:
       - elasticsearch
       - kibana
       - hi_service
-
-  hi_service:
-    image: marshalw/hi-service
-    container_name: hi_service
-    ports:
-      - 8888:8888
 
 networks:
   default:
