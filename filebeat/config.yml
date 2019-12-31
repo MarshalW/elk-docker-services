@@ -13,6 +13,10 @@ filebeat:
                 add_error_key: true
                 # message_key: "log"
                 overwrite_keys: true
+              processors:
+                - decode_json_fields:
+                    fields: ["message"]
+                    max_depth: 4
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
@@ -23,7 +27,6 @@ setup.kibana:
   host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
-
 # output.file:
 #   path: "/usr/share/filebeat/log"
 #   filename: test.log
