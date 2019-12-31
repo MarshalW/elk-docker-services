@@ -14,9 +14,6 @@ filebeat:
                 message_key: "log"
                 overwrite_keys: true
 
-# setup.dashboards:
-#   enabled: true
-
 # output.elasticsearch:
 #   hosts: "${ELASTICSEARCH_HOSTS}"
 #   username: "${ELASTICSEARCH_USERNAME}"
@@ -30,12 +27,11 @@ filebeat:
 output.file:
   path: "/usr/share/filebeat/log"
   filename: test.log
-
-processors:
-  - decode_json_fields:
-      fields: ["message"]
-      process_array: false
-      max_depth: 2
+# processors:
+#   - decode_json_fields:
+#       fields: ["message"]
+#       process_array: false
+#       max_depth: 2
 # setup.template:
 #   name: "hiservice"
 #   pattern: "hiservice-*"
