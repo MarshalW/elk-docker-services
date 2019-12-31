@@ -13,9 +13,9 @@ filebeat:
                 add_error_key: true
                 # message_key: "log"
                 overwrite_keys: true
-              # processors:
-  #                - drop_fields:
-  #                   fields: ["message"]
+              processors:
+                 - drop_fields:
+                    fields: ["message","service"]
   #                - decode_json_fields:
   #                    fields: ["message"]
   #                    max_depth: 4
