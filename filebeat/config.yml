@@ -8,11 +8,11 @@ filebeat:
             - type: container
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              json:
-                keys_under_root: true
-                add_error_key: true
-                # message_key: "log"
-                overwrite_keys: true
+            #   json:
+            #     keys_under_root: true
+            #     add_error_key: true
+            #     # message_key: "log"
+            #     overwrite_keys: true
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
