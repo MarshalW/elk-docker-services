@@ -1,45 +1,43 @@
 filebeat:
-    autodiscover.providers:
-      - type: docker
-        templates:
-          - condition.contains:
-              docker.container.image: hi-service
-            config:
-              - type: container
-                paths:
-                  - /var/lib/docker/containers/${data.docker.container.id}/*.log
-                json:
-                  keys_under_root: true
-                  add_error_key: true
-                  # message_key: "log"
-                  overwrite_keys: true
-                # processors:
+  autodiscover.providers:
+    - type: docker
+      templates:
+        - condition.contains:
+            docker.container.image: hi-service
+          config:
+            - type: container
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+              json:
+                keys_under_root: true
+                add_error_key: true
+                # message_key: "log"
+                overwrite_keys: true
+              # processors:
   #                - drop_fields:
   #                   fields: ["message"]
   #                - decode_json_fields:
   #                    fields: ["message"]
   #                    max_depth: 4
-                #   - rename:
-                #       fields:
-                #         - from: "service"
-                #           to: "service_doc"
-                #         - from: "message"
-                #           to: "message_doc"
-  
-  output.elasticsearch:
-    hosts: "${ELASTICSEARCH_HOSTS}"
-    username: "${ELASTICSEARCH_USERNAME}"
-    password: "${ELASTICSEARCH_PASSWORD}"
-  
-  setup.kibana:
-    host: "${KIBANA_HOST}"
-    username: ${ELASTICSEARCH_USERNAME}
-    password: ${ELASTICSEARCH_PASSWORD}
-  
+  #   - rename:
+  #       fields:
+  #         - from: "service"
+  #           to: "service_doc"
+  #         - from: "message"
+  #           to: "message_doc"
+
+output.elasticsearch:
+  hosts: "${ELASTICSEARCH_HOSTS}"
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
   #output.file:
   #  path: "/usr/share/filebeat/log"
   #  filename: test.log
-  
   # processors:
   #   - decode_json_fields:
   #       fields: ["message"]
