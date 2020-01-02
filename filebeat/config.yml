@@ -14,17 +14,17 @@ filebeat:
                 # message_key: "log"
                 overwrite_keys: true
               processors:
-                 - drop_fields:
-                    fields: ["message","service"]
-  #                - decode_json_fields:
-  #                    fields: ["message"]
-  #                    max_depth: 4
-  #   - rename:
-  #       fields:
-  #         - from: "service"
-  #           to: "service_doc"
-  #         - from: "message"
-  #           to: "message_doc"
+                - drop_fields:
+                    fields: ["message"]
+    #                - decode_json_fields:
+    #                    fields: ["message"]
+    #                    max_depth: 4
+                - rename:
+                    fields:
+                        # - from: "service"
+                        # to: "service_doc"
+                        - from: "message"
+                        to: "logs"
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
