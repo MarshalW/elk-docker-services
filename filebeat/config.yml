@@ -16,14 +16,14 @@ filebeat:
               processors:
                 - drop_fields:
                     fields: ["message"]
-    #                - decode_json_fields:
-    #                    fields: ["message"]
-    #                    max_depth: 4
+                #                - decode_json_fields:
+                #                    fields: ["message"]
+                #                    max_depth: 4
                 - rename:
                     fields:
-                        # - from: "service"
-                        # to: "service_doc"
-                        - from: "message"
+                      # - from: "service"
+                      # to: "service_doc"
+                      - from: "message"
                         to: "logs"
 
 output.elasticsearch:
