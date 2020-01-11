@@ -30,6 +30,7 @@ output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
+  index: "hi-service-%{[agent.version]}-%{+yyyy.MM.dd}"
 
 setup.kibana:
   host: "${KIBANA_HOST}"
@@ -46,3 +47,10 @@ setup.kibana:
   # setup.template:
   #   name: "hiservice"
   #   pattern: "hiservice-*"
+
+setup.template: 
+  name: "hi-service"
+  pattern: "hi-service-*"
+
+setup.ilm:
+  enabled: false
