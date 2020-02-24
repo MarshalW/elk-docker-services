@@ -1,12 +1,6 @@
 version: "3.7"
 
 services:
-  hi_service:
-    image: marshalw/hi-service
-    container_name: hi_service
-    ports:
-      - 8888:8888
-
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -44,72 +38,6 @@ services:
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     depends_on:
       - elasticsearch
-
-  packetbeat:
-    image: docker.elastic.co/beats/packetbeat:$ELK_VERSION
-    container_name: packetbeat
-    user: root
-    network_mode: "host"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./packetbeat/config.yml:/usr/share/packetbeat/packetbeat.yml
-    environment:
-      ELASTICSEARCH_HOSTS: localhost:9200
-      KIBANA_HOST: localhost:5601
-      ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    cap_add:
-      - NET_RAW
-      - NET_ADMIN
-    command: ["--strict.perms=false"]
-    restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-
-  metricbeat:
-    image: docker.elastic.co/beats/metricbeat:$ELK_VERSION
-    container_name: metricbeat
-    user: root
-    network_mode: "host"
-    volumes:
-      - ./metricbeat/config.yml:/usr/share/metricbeat/metricbeat.yml:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
-      - /proc:/hostfs/proc:ro
-      - /:/hostfs:ro
-    environment:
-      ELASTICSEARCH_HOSTS: localhost:9200
-      KIBANA_HOST: localhost:5601
-      ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
-    restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-    container_name: filebeat
-    user: root
-    network_mode: "host"
-    volumes:
-      - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./filebeat/log:/usr/share/filebeat/log
-    environment:
-      ELASTICSEARCH_HOSTS: localhost:9200
-      KIBANA_HOST: localhost:5601
-      ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    command: ["--strict.perms=false","-e"]
-    restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-      - hi_service
 
 networks:
   default:
