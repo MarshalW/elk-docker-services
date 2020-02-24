@@ -19,12 +19,12 @@ filebeat:
                 # - decode_json_fields:
                 #     fields: ["message"]
                 #     max_depth: 4
-                - rename:
-                    fields:
-                      - from: "service"
-                        to: "service_doc"
-                      - from: "message"
-                        to: "message_doc"
+                # - rename:
+                #     fields:
+                #       - from: "service"
+                #         to: "service_doc"
+                #       - from: "message"
+                #         to: "message_doc"
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
@@ -36,21 +36,25 @@ setup.kibana:
   host: "${KIBANA_HOST}"
   username: ${ELASTICSEARCH_USERNAME}
   password: ${ELASTICSEARCH_PASSWORD}
-  #output.file:
-  #  path: "/usr/share/filebeat/log"
-  #  filename: test.log
+
+# output.file:
+#   path: "/usr/share/filebeat/log"
+#   filename: test.log
+
   # processors:
   #   - decode_json_fields:
   #       fields: ["message"]
   #       process_array: false
   #       max_depth: 2
-  # setup.template:
-  #   name: "hiservice"
-  #   pattern: "hiservice-*"
 
-setup.template: 
+# setup.template:
+#   name: "hi-service"
+#   pattern: "hi-service-*"
+
+setup.template.json:
+  enabled: true
+  path: "template.json"
   name: "hi-service"
-  pattern: "hi-service-*"
 
 setup.ilm:
   enabled: false
