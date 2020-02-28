@@ -45,7 +45,7 @@ services:
     volumes:
       - ./spider/config.yml:/usr/src/app/config/spider.yml
       - ./spider/cache:/usr/service/app/cache
-    command: "*/20 * * * * /start.sh"
+    command: ["*/20 * * * * /start.sh"]
 
 networks:
   default:
