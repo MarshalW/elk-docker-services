@@ -1,0 +1,26 @@
+urls:
+  - http://news.china.com.cn/node_7247300.htm
+domainWhitelist:
+  - news.china.com.cn
+maxDepth: 5
+timeout: !!int 60000 #超时
+interval: !!int 1500 #请求间隔
+maxConcurrency: 100 #同时的请求数
+respectRobotsTxt: false
+debug: false
+rules:
+  fetch:
+    - !!js/regexp ^\/node_7247300_.* # 列表分页
+    - !!js/regexp \/([1-3]\d{3}-(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])).* # 文章
+  parse:
+    - !!js/regexp \/([1-3]\d{3}-(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])).* # 文章
+  item:
+    - name: title # 标题
+      expression: //h1[@class="articleTitle"]
+    - name: title # 标题
+      expression: //h1[@class="artiTitle clearB"]
+    - name: content # 正文
+      expression: //div[@id="articleBody"]
+    - name: publishdate # 发布日期
+      expression: //meta[@name="publishdate"]/@content
+allTimeout: !!int 1800000 # 半小时

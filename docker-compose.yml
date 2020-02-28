@@ -39,6 +39,14 @@ services:
     depends_on:
       - elasticsearch
 
+  spider:
+    image: marshalw/spider-service
+    container_name: spider
+    valumes:
+      - ./spider/config.yml:/usr/src/app/config/spider.yml
+      - ./spider/cache:/usr/service/app/cache
+    command: "*/20 * * * * /start.sh"
+
 networks:
   default:
     name: $DEFAULT_NETWORK
