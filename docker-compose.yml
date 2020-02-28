@@ -42,7 +42,7 @@ services:
   spider:
     image: marshalw/spider-service
     container_name: spider
-    valumes:
+    volumes:
       - ./spider/config.yml:/usr/src/app/config/spider.yml
       - ./spider/cache:/usr/service/app/cache
     command: "*/20 * * * * /start.sh"
