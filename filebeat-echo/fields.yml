@@ -18,7 +18,7 @@
         - name: intValue
           type: integer
         - name: current
-          type: keyword
+          type: date
         - name: article
           type: text
           analyzer: ik_max_word
