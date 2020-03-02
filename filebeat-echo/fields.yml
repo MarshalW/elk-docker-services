@@ -11,6 +11,14 @@
       type: keyword
     - name: content
       type: text
+    - name: data
+      properties:
+        - name: intValue
+          type: integer
+        - name: current
+          type: keyword
+        - name: article
+          type: text
 #
 #   fields:
 #     - name: url
