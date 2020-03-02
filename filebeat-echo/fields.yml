@@ -1,0 +1,13 @@
+- key: echo
+  title: echo message
+  description: >
+    Contains echo message lines.
+  fields:
+    - name: url
+      type: keyword
+    - name: timestamp
+      type: date
+    - name: title
+      type: keyword
+    - name: content
+      type: text
