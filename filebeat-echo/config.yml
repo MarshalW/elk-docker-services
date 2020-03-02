@@ -16,8 +16,17 @@ setup.ilm:
 
 setup.template.name: "filebeat-echo"
 setup.template.pattern: "filebeat-echo-*"
-setup.template.overwrite: true
-setup.template.fields: "custom.yml"
+# setup.template.overwrite: true
+# setup.template.fields: "custom.yml"
+setup.template.append_fields:
+  - name: timestamp
+    type: date
+  - name: content
+    type: text
+    analyzer: ik_max_word
+    search_analyzer: ik_smart
+  - name: data.current
+    type: date
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
