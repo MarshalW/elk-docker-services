@@ -17,7 +17,7 @@ setup.ilm:
 setup.template.name: "filebeat-echo"
 setup.template.pattern: "filebeat-echo-*"
 setup.template.overwrite: true
-setup.template.fields: "/usr/share/filebeat/fields.yml"
+setup.template.fields: "customer.yml"
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
