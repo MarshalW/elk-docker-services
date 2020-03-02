@@ -11,6 +11,8 @@
       type: keyword
     - name: content
       type: text
+      analyzer: ik_max_word
+      search_analyzer: ik_smart
     - name: data
       properties:
         - name: intValue
@@ -19,6 +21,8 @@
           type: keyword
         - name: article
           type: text
+          analyzer: ik_max_word
+          search_analyzer: ik_smart
 #
 #   fields:
 #     - name: url
