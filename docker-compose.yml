@@ -51,6 +51,28 @@ services:
     image: marshalw/echo-service
     container_name: echo
 
+  filebeat_echo:
+    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+    container_name: filebeat-echo
+    user: root
+    network_mode: "host"
+    volumes:
+      - ./filebeat-echo/fields.yml:/usr/share/filebeat/fields.yml:ro
+      - ./filebeat-echo/config.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ELASTICSEARCH_HOSTS: localhost:9200
+      KIBANA_HOST: localhost:5601
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    command: ["--strict.perms=false", "-e"]
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+      - kibana
+      - echo
+
   # filebeat_spider:
   #   image: docker.elastic.co/beats/filebeat:$ELK_VERSION
   #   container_name: filebeat-spider
