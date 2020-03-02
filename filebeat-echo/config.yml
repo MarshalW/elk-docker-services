@@ -16,8 +16,8 @@ setup.ilm:
 
 setup.template.name: "filebeat-echo"
 setup.template.pattern: "filebeat-echo-*"
-# setup.template.overwrite: true
-# setup.template.fields: "custom.yml"
+setup.template.overwrite: true
+setup.template.fields: "custom.yml"
 setup.template.append_fields:
   - name: timestamp
     type: date
