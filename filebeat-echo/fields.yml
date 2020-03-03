@@ -2,7 +2,7 @@
   title: echo message
   description: >
     Contains echo message lines.
-  properties:
+  fields:
     - name: url
       type: keyword
     - name: timestamp
@@ -23,13 +23,3 @@
           type: text
           analyzer: ik_max_word
           search_analyzer: ik_smart
-#
-#   fields:
-#     - name: url
-#       type: keyword
-#     - name: timestamp
-#       type: date
-#     - name: title
-#       type: keyword
-#     - name: content
-#       type: text
