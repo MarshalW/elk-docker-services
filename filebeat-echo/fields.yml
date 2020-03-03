@@ -2,7 +2,7 @@
   title: echo message
   description: >
     Contains echo message lines.
-  fields:
+  properties:
     - name: url
       type: keyword
     - name: timestamp
