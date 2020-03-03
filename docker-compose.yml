@@ -47,18 +47,14 @@ services:
       - ./spider/cache:/usr/service/app/cache
     command: ["*/20 * * * * /start.sh"]
 
-  echo:
-    image: marshalw/echo-service
-    container_name: echo
-
-  filebeat_echo:
+  filebeat_spider:
     image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-    container_name: filebeat-echo
+    container_name: filebeat-spider
     user: root
     network_mode: "host"
     volumes:
-      - ./filebeat-echo/fields.yml:/usr/share/filebeat/custom.yml:ro
-      - ./filebeat-echo/config.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./filebeat/fields.yml:/usr/share/filebeat/custom.yml:ro
+      - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
@@ -71,16 +67,20 @@ services:
     depends_on:
       - elasticsearch
       - kibana
-      - echo
+      - spider
 
-  # filebeat_spider:
+  # echo:
+  #   image: marshalw/echo-service
+  #   container_name: echo
+  #
+  # filebeat_echo:
   #   image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-  #   container_name: filebeat-spider
+  #   container_name: filebeat-echo
   #   user: root
   #   network_mode: "host"
   #   volumes:
-  #     - ./filebeat/fields.yml:/usr/share/filebeat/fields.yml:ro
-  #     - ./filebeat/config.yml:/usr/share/filebeat/filebeat.yml:ro
+  #     - ./filebeat-echo/fields.yml:/usr/share/filebeat/custom.yml:ro
+  #     - ./filebeat-echo/config.yml:/usr/share/filebeat/filebeat.yml:ro
   #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
   #     - /var/run/docker.sock:/var/run/docker.sock:ro
   #   environment:
@@ -93,7 +93,7 @@ services:
   #   depends_on:
   #     - elasticsearch
   #     - kibana
-  #     - spider
+  #     - echo
 
 networks:
   default:

@@ -1,0 +1,9 @@
+- key: spider
+  title: spider log
+  description: >
+    spider news item.
+  fields:
+    - name: message.item.content
+      type: text
+      analyzer: ik_max_word
+      search_analyzer: ik_smart

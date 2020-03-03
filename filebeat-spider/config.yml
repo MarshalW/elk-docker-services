@@ -1,0 +1,31 @@
+filebeat:
+  autodiscover.providers:
+    - type: docker
+      templates:
+        - condition.contains:
+            docker.container.image: spider-service
+          config:
+            - type: container
+              paths:
+                - /var/lib/docker/containers/${data.docker.container.id}/*.log
+              json:
+                keys_under_root: true
+
+setup.ilm:
+  enabled: false
+
+setup.template.name: "filebeat-spider"
+setup.template.pattern: "filebeat-spider-*"
+setup.template.overwrite: true
+setup.template.fields: "custom.yml"
+
+output.elasticsearch:
+  hosts: "${ELASTICSEARCH_HOSTS}"
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+  index: "filebeat-spider-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
