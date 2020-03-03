@@ -27,6 +27,10 @@ setup.template.append_fields:
     search_analyzer: ik_smart
   - name: data.current
     type: date
+  - name: data.article
+    type: text
+    analyzer: ik_max_word
+    search_analyzer: ik_smart
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
