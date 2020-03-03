@@ -19,13 +19,3 @@
       search_analyzer: ik_smart
     - name: data.current
       type: date
-    # - name: data
-    #   properties:
-    #     - name: intValue
-    #       type: integer
-    #     - name: current
-    #       type: date
-    #     - name: article
-    #       type: text
-    #       analyzer: ik_max_word
-    #       search_analyzer: ik_smart

@@ -1,7 +1,0 @@
-- key: echo
-  title: echo message
-  description: >
-    Contains echo message lines.
-  properties:
-    - name: message_abc
-      type: integer
