@@ -6,8 +6,9 @@ maxDepth: 5
 timeout: !!int 60000 #超时
 interval: !!int 1500 #请求间隔
 maxConcurrency: 100 #同时的请求数
+logging:
+  level: debug
 respectRobotsTxt: false
-debug: false
 rules:
   fetch:
     - !!js/regexp ^\/node_7247300_.* # 列表分页
