@@ -52,6 +52,11 @@ services:
     container_name: filebeat-spider
     user: root
     network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100k"
+        max-file: "10"
     volumes:
       - ./filebeat-spider/fields.yml:/usr/share/filebeat/custom.yml:ro
       - ./filebeat-spider/config.yml:/usr/share/filebeat/filebeat.yml:ro
