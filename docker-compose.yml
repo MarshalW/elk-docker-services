@@ -47,32 +47,32 @@ services:
       - ./spider/cache:/usr/service/app/cache
     command: ["*/20 * * * * /start.sh"]
 
-  # filebeat_spider:
-  #   image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-  #   container_name: filebeat-spider
-  #   user: root
-  #   network_mode: "host"
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "100k"
-  #       max-file: "10"
-  #   volumes:
-  #     - ./filebeat-spider/fields.yml:/usr/share/filebeat/custom.yml:ro
-  #     - ./filebeat-spider/config.yml:/usr/share/filebeat/filebeat.yml:ro
-  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #   environment:
-  #     ELASTICSEARCH_HOSTS: localhost:9200
-  #     KIBANA_HOST: localhost:5601
-  #     ELASTICSEARCH_USERNAME: $ELASTIC_USER
-  #     ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-  #   command: ["--strict.perms=false", "-e"]
-  #   restart: on-failure
-  #   depends_on:
-  #     - elasticsearch
-  #     - kibana
-  #     - spider
+  filebeat_spider:
+    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+    container_name: filebeat-spider
+    user: root
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
+    volumes:
+      - ./filebeat-spider/fields.yml:/usr/share/filebeat/custom.yml:ro
+      - ./filebeat-spider/config.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ELASTICSEARCH_HOSTS: localhost:9200
+      KIBANA_HOST: localhost:5601
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    command: ["--strict.perms=false", "-e"]
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+      - kibana
+      - spider
 
   # echo:
   #   image: marshalw/echo-service
