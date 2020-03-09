@@ -6,12 +6,12 @@ filebeat:
             docker.container.image: spider-service
           config:
             - type: container
-              exclude_lines: ['^crond:']
-              include_lines: ['^{']
+              # exclude_lines: ['^crond:']
+              # include_lines: ['^{']
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              # json:
-              #   keys_under_root: true
+              json:
+                keys_under_root: true
               #   message_key: message
                 
               processors:
@@ -19,9 +19,8 @@ filebeat:
                     when:
                       regexp:
                         message: "^crond:.*"
-                # - decode_json_fields:
-                #     # target: ""
-                #     fields: ["message"]
+                - decode_json_fields:
+                    fields: ["message"]
 
 setup.ilm:
   enabled: false
