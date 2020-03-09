@@ -6,11 +6,18 @@ filebeat:
             docker.container.image: spider-service
           config:
             - type: container
-              exclude_lines: ['^crond:']
+              # exclude_lines: ['^crond:']
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              json:
-                keys_under_root: true
+              # json:
+              #   keys_under_root: true
+              processors:
+                - drop_event:
+                    when:
+                      regexp:
+                        message: "^crond:"
+                - decode_json_fields:
+                    fields: ["message"]
 
 setup.ilm:
   enabled: false
