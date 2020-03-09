@@ -22,7 +22,7 @@ filebeat:
                 - copy_fields:
                     fields:
                       - from: message.message
-                        to: message
+                        to: info
                     fail_on_error: false
                     ignore_missing: true
 
