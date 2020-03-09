@@ -16,8 +16,8 @@ filebeat:
                     when:
                       regexp:
                         message: "^crond:"
-                - decode_json_fields:
-                    fields: ["message"]
+                # - decode_json_fields:
+                #     fields: ["message"]
 
 setup.ilm:
   enabled: false
