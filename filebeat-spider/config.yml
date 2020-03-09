@@ -15,8 +15,9 @@ filebeat:
                 - drop_event:
                     when:
                       regexp:
-                        message: "^crond:"
-                # - decode_json_fields:
+                        message: "^crond:.*"
+                - decode_json_fields:
+                  target: ""
                 #     fields: ["message"]
 
 setup.ilm:
