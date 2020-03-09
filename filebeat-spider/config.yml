@@ -7,21 +7,21 @@ filebeat:
           config:
             - type: container
               # exclude_lines: ['^crond:']
-              include_lines: ['^{']
+              # include_lines: ['^{']
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              json:
-                keys_under_root: true
-                message_key: message
+              # json:
+              #   keys_under_root: true
+              #   message_key: message
                 
-              # processors:
-              #   - drop_event:
-              #       when:
-              #         regexp:
-              #           message: "^crond:.*"
-              #   - decode_json_fields:
-              #       # target: ""
-              #       fields: ["message"]
+              processors:
+                - drop_event:
+                    when:
+                      regexp:
+                        message: "^crond:.*"
+                # - decode_json_fields:
+                #     # target: ""
+                #     fields: ["message"]
 
 setup.ilm:
   enabled: false
