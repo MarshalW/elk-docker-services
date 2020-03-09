@@ -12,6 +12,8 @@ filebeat:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
               json:
                 keys_under_root: true
+                message_key: message
+                
               # processors:
               #   - drop_event:
               #       when:
