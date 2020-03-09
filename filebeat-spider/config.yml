@@ -18,7 +18,7 @@ filebeat:
                         message: "^crond:.*"
                 - decode_json_fields:
                     target: ""
-                #     fields: ["message"]
+                    fields: ["message"]
 
 setup.ilm:
   enabled: false
