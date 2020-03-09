@@ -20,11 +20,11 @@ filebeat:
                     # target: ""
                     fields: ["message"]
                 - copy_fields:
-                  fields:
-                    - from: message.message
-                      to: message
-                  fail_on_error: false
-                  ignore_missing: true
+                    fields:
+                      - from: message.message
+                        to: message
+                    fail_on_error: false
+                    ignore_missing: true
 
 setup.ilm:
   enabled: false
