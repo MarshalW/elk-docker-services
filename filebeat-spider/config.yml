@@ -22,9 +22,9 @@ filebeat:
                 - convert:
                     fields:
                       - {
-                          from: "message.message.item",
-                          to: "message.item",
-                          type: "object",
+                          from: "message.message.item.content",
+                          to: "message.item.content",
+                          type: "string",
                         }
                     ignore_missing: true
                     fail_on_error: false
