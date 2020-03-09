@@ -9,8 +9,8 @@ filebeat:
               # exclude_lines: ['^crond:']
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              json:
-                keys_under_root: true
+              # json:
+              #   keys_under_root: true
               processors:
                 - drop_event:
                     when:
