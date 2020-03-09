@@ -10,10 +10,10 @@ filebeat:
               # include_lines: ['^{']
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              json:
-                keys_under_root: true
+              # json:
+              #   keys_under_root: true
               #   message_key: message
-                
+
               processors:
                 - drop_event:
                     when:
@@ -21,6 +21,8 @@ filebeat:
                         message: "^crond:.*"
                 - decode_json_fields:
                     fields: ["message"]
+                    target: ""
+                    overwrite_keys: true
 
 setup.ilm:
   enabled: false
