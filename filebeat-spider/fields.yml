@@ -7,5 +7,5 @@
       type: text
       analyzer: ik_max_word
       search_analyzer: ik_smart
-    - name: @timestamp
+    - name: "@timestamp"
       type: date
