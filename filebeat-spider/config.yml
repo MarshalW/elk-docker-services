@@ -19,12 +19,15 @@ filebeat:
                 - decode_json_fields:
                     # target: ""
                     fields: ["message"]
-                - copy_fields:
+                - convert:
                     fields:
-                      - from: message.message
-                        to: info
-                    fail_on_error: false
+                      - {
+                          from: "message.message.item",
+                          to: "message.item",
+                          type: "object",
+                        }
                     ignore_missing: true
+                    fail_on_error: false
 
 setup.ilm:
   enabled: false
