@@ -9,25 +9,16 @@ filebeat:
               # exclude_lines: ['^crond:']
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              # json:
-              #   keys_under_root: true
-              processors:
-                - drop_event:
-                    when:
-                      regexp:
-                        message: "^crond:.*"
-                - decode_json_fields:
-                    # target: ""
-                    fields: ["message"]
-                - convert:
-                    fields:
-                      - {
-                          from: "message.message.item.content",
-                          to: "message.item.content",
-                          type: "string",
-                        }
-                    ignore_missing: true
-                    fail_on_error: false
+              json:
+                keys_under_root: true
+              # processors:
+              #   - drop_event:
+              #       when:
+              #         regexp:
+              #           message: "^crond:.*"
+              #   - decode_json_fields:
+              #       # target: ""
+              #       fields: ["message"]
 
 setup.ilm:
   enabled: false
