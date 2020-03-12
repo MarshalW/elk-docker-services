@@ -7,6 +7,8 @@ services:
     image: nginx
     ports:
       - "10086:80"
+    volumes:
+      - .web/www:/var/www
   elasticsearch:
     build:
       context: ./elasticsearch
