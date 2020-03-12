@@ -4,7 +4,7 @@ services:
   web:
     container_name: web
     restart: always
-    image: nginx
+    image: emazzotta/docker-nginx-lua
     ports:
       - "10086:80"
     volumes:
