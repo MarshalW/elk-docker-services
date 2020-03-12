@@ -8,7 +8,7 @@ services:
     ports:
       - "10086:80"
     volumes:
-      - .web/www:/var/www
+      - ./web/www:/var/www
   elasticsearch:
     build:
       context: ./elasticsearch
