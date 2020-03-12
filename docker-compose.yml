@@ -2,9 +2,11 @@ version: "3.7"
 
 services:
   web:
+    container_name: web
+    restart: always
     image: nginx
     ports:
-      - "8080:80"
+      - "10086:80"
   elasticsearch:
     build:
       context: ./elasticsearch
