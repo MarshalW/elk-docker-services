@@ -3,19 +3,22 @@ filebeat:
     - type: docker
       templates:
         - condition.contains:
-            docker.container.image: echo-service
+            docker.container.image: web-logger
           config:
             - type: container
               paths:
                 - /var/lib/docker/containers/${data.docker.container.id}/*.log
-              json:
-                keys_under_root: true
+              processors:
+                - decode_json_fields:
+                    fields: ["message"]
+                    target: ""
+                    overwrite_keys: true
 
 setup.ilm:
   enabled: false
 
-setup.template.name: "filebeat-echo"
-setup.template.pattern: "filebeat-echo-*"
+setup.template.name: "filebeat-web-logger"
+setup.template.pattern: "filebeat-web-logger-*"
 setup.template.overwrite: true
 setup.template.fields: "custom.yml"
 
@@ -23,7 +26,7 @@ output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
-  index: "filebeat-echo-%{[agent.version]}-%{+yyyy.MM.dd}"
+  index: "filebeat-web-logger-%{[agent.version]}-%{+yyyy.MM.dd}"
 
 setup.kibana:
   host: "${KIBANA_HOST}"

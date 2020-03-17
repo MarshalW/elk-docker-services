@@ -1,0 +1,13 @@
+- key: web-logger
+  title: web log
+  description: >
+    web logger items.
+  fields:
+    - name: message.data.temperature
+      type: float
+    - name: message.data.humidity
+      type: float
+    - name: timestamp
+      type: date
+    - name: "@timestamp"
+      type: date

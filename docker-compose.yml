@@ -1,27 +1,6 @@
 version: "3.7"
 
 services:
-  # web:
-  #   container_name: web
-  #   restart: always
-  #   image: emazzotta/docker-nginx-lua
-  #   ports:
-  #     - "10086:80"
-  #   volumes:
-  #     - ./web/nginx.conf:/etc/nginx/nginx.conf:ro
-  #     - ./web/www:/usr/share/nginx/html:ro
-  #     - ./web/site.conf:/etc/nginx/conf.d/default.conf:ro
-  web_logger:
-    container_name: web-logger
-    restart: always
-    image: marshalw/web-logger
-    ports:
-      - "10086:3000"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "10"
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -95,31 +74,44 @@ services:
       - kibana
       - spider
 
-  # echo:
-  #   image: marshalw/echo-service
-  #   container_name: echo
-  #
-  # filebeat_echo:
-  #   image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-  #   container_name: filebeat-echo
-  #   user: root
-  #   network_mode: "host"
-  #   volumes:
-  #     - ./filebeat-echo/fields.yml:/usr/share/filebeat/custom.yml:ro
-  #     - ./filebeat-echo/config.yml:/usr/share/filebeat/filebeat.yml:ro
-  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #   environment:
-  #     ELASTICSEARCH_HOSTS: localhost:9200
-  #     KIBANA_HOST: localhost:5601
-  #     ELASTICSEARCH_USERNAME: $ELASTIC_USER
-  #     ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-  #   command: ["--strict.perms=false", "-e"]
-  #   restart: on-failure
-  #   depends_on:
-  #     - elasticsearch
-  #     - kibana
-  #     - echo
+  web_logger:
+    container_name: web-logger
+    restart: always
+    image: marshalw/web-logger
+    ports:
+      - "10086:3000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
+
+  filebeat_web_logger:
+    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+    container_name: filebeat-web-logger
+    user: root
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
+    volumes:
+      - ./filebeat-web-logger/fields.yml:/usr/share/filebeat/custom.yml:ro
+      - ./filebeat-web-logger/config.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ELASTICSEARCH_HOSTS: localhost:9200
+      KIBANA_HOST: localhost:5601
+      ELASTICSEARCH_USERNAME: $ELASTIC_USER
+      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+    command: ["--strict.perms=false", "-e"]
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+      - kibana
+      - web_logger
 
 networks:
   default:
