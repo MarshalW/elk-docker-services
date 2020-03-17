@@ -17,6 +17,11 @@ services:
     image: marshalw/web-logger
     ports:
       - "10086:3000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "10"
   elasticsearch:
     build:
       context: ./elasticsearch
