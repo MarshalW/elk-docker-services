@@ -27,6 +27,7 @@ output.elasticsearch:
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
   index: "filebeat-web-logger-%{[agent.version]}-%{+yyyy.MM.dd}"
+  pipeline: my_test_pipe
 
 setup.kibana:
   host: "${KIBANA_HOST}"
