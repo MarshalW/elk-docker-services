@@ -25,101 +25,101 @@ services:
     ports:
       - 9200:9200
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:$ELK_VERSION
-    container_name: kibana
-    volumes:
-      - ./kibana/config.yml:/usr/share/kibana/config/kibana.yml
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      - 5601:5601
-    environment:
-      SERVER_NAME: kibana
-      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
-      ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    depends_on:
-      - elasticsearch
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:$ELK_VERSION
+  #   container_name: kibana
+  #   volumes:
+  #     - ./kibana/config.yml:/usr/share/kibana/config/kibana.yml
+  #     - /etc/localtime:/etc/localtime:ro
+  #   ports:
+  #     - 5601:5601
+  #   environment:
+  #     SERVER_NAME: kibana
+  #     ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+  #     ELASTICSEARCH_USERNAME: $ELASTIC_USER
+  #     ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+  #   depends_on:
+  #     - elasticsearch
 
-  spider:
-    image: marshalw/spider-service
-    container_name: spider
-    volumes:
-      - ./spider/config.yml:/usr/src/app/config/spider.yml:ro
-      - ./spider/cache:/usr/service/app/cache
-      - /etc/localtime:/etc/localtime:ro
-    command: ["*/20 * * * * /start.sh"]
+  # spider:
+  #   image: marshalw/spider-service
+  #   container_name: spider
+  #   volumes:
+  #     - ./spider/config.yml:/usr/src/app/config/spider.yml:ro
+  #     - ./spider/cache:/usr/service/app/cache
+  #     - /etc/localtime:/etc/localtime:ro
+  #   command: ["*/20 * * * * /start.sh"]
 
-  filebeat_spider:
-    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-    container_name: filebeat-spider
-    user: root
-    network_mode: "host"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "10"
-    volumes:
-      - ./filebeat-spider/ilm.json:/usr/share/filebeat/ilm.json:ro
-      - ./filebeat-spider/fields.yml:/usr/share/filebeat/custom.yml:ro
-      - ./filebeat-spider/config.yml:/usr/share/filebeat/filebeat.yml:ro
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      ELASTICSEARCH_HOSTS: localhost:9200
-      KIBANA_HOST: localhost:5601
-      ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    command: ["--strict.perms=false", "-e"]
-    restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-      - spider
+  # filebeat_spider:
+  #   image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+  #   container_name: filebeat-spider
+  #   user: root
+  #   network_mode: "host"
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "1m"
+  #       max-file: "10"
+  #   volumes:
+  #     - ./filebeat-spider/ilm.json:/usr/share/filebeat/ilm.json:ro
+  #     - ./filebeat-spider/fields.yml:/usr/share/filebeat/custom.yml:ro
+  #     - ./filebeat-spider/config.yml:/usr/share/filebeat/filebeat.yml:ro
+  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /etc/localtime:/etc/localtime:ro
+  #   environment:
+  #     ELASTICSEARCH_HOSTS: localhost:9200
+  #     KIBANA_HOST: localhost:5601
+  #     ELASTICSEARCH_USERNAME: $ELASTIC_USER
+  #     ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+  #   command: ["--strict.perms=false", "-e"]
+  #   restart: on-failure
+  #   depends_on:
+  #     - elasticsearch
+  #     - kibana
+  #     - spider
 
-  web_logger:
-    container_name: web-logger
-    restart: always
-    image: marshalw/web-logger
-    ports:
-      - "10086:3000"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "10"
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
+  # web_logger:
+  #   container_name: web-logger
+  #   restart: always
+  #   image: marshalw/web-logger
+  #   ports:
+  #     - "10086:3000"
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "1m"
+  #       max-file: "10"
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
 
-  filebeat_web_logger:
-    image: docker.elastic.co/beats/filebeat:$ELK_VERSION
-    container_name: filebeat-web-logger
-    user: root
-    network_mode: "host"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1m"
-        max-file: "10"
-    volumes:
-      - ./filebeat-web-logger/fields.yml:/usr/share/filebeat/custom.yml:ro
-      - ./filebeat-web-logger/config.yml:/usr/share/filebeat/filebeat.yml:ro
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /etc/localtime:/etc/localtime:ro
-    environment:
-      ELASTICSEARCH_HOSTS: localhost:9200
-      KIBANA_HOST: localhost:5601
-      ELASTICSEARCH_USERNAME: $ELASTIC_USER
-      ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    command: ["--strict.perms=false", "-e"]
-    restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-      - web_logger
+  # filebeat_web_logger:
+  #   image: docker.elastic.co/beats/filebeat:$ELK_VERSION
+  #   container_name: filebeat-web-logger
+  #   user: root
+  #   network_mode: "host"
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "1m"
+  #       max-file: "10"
+  #   volumes:
+  #     - ./filebeat-web-logger/fields.yml:/usr/share/filebeat/custom.yml:ro
+  #     - ./filebeat-web-logger/config.yml:/usr/share/filebeat/filebeat.yml:ro
+  #     - /var/lib/docker/containers:/var/lib/docker/containers:ro
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /etc/localtime:/etc/localtime:ro
+  #   environment:
+  #     ELASTICSEARCH_HOSTS: localhost:9200
+  #     KIBANA_HOST: localhost:5601
+  #     ELASTICSEARCH_USERNAME: $ELASTIC_USER
+  #     ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
+  #   command: ["--strict.perms=false", "-e"]
+  #   restart: on-failure
+  #   depends_on:
+  #     - elasticsearch
+  #     - kibana
+  #     - web_logger
 
 networks:
   default:
