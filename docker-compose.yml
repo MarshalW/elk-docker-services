@@ -45,7 +45,7 @@ services:
     image: marshalw/spider-service
     container_name: spider
     volumes:
-      - ./spider/config.yml:/usr/src/app/config/spider.yml
+      - ./spider/config.yml:/usr/src/app/config/spider.yml:ro
       - ./spider/cache:/usr/service/app/cache
       - /etc/localtime:/etc/localtime:ro
     command: ["*/20 * * * * /start.sh"]
@@ -61,6 +61,7 @@ services:
         max-size: "1m"
         max-file: "10"
     volumes:
+      - ./filebeat-spider/ilm.json:/usr/share/filebeat/ilm.json:ro
       - ./filebeat-spider/fields.yml:/usr/share/filebeat/custom.yml:ro
       - ./filebeat-spider/config.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro

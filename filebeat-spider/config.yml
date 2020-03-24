@@ -25,10 +25,13 @@ filebeat:
                     overwrite_keys: true
 
 setup.ilm:
-  enabled: false
+  enabled: true
+  rollover_alias: "filebeat-spider"
+  pattern: "{now/d}-000001"
+  policy_file: "ilm.json"
 
-setup.template.name: "filebeat-spider"
-setup.template.pattern: "filebeat-spider-*"
+# setup.template.name: "filebeat-spider"
+# setup.template.pattern: "filebeat-spider-*"
 setup.template.overwrite: true
 setup.template.fields: "custom.yml"
 

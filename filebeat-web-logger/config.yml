@@ -15,10 +15,13 @@ filebeat:
                     overwrite_keys: true
 
 setup.ilm:
-  enabled: false
+  enabled: true
+  rollover_alias: "filebeat-web-logger"
+  pattern: "{now/d}-000001"
+  policy_file: "ilm.json"
 
-setup.template.name: "filebeat-web-logger"
-setup.template.pattern: "filebeat-web-logger-*"
+# setup.template.name: "filebeat-web-logger"
+# setup.template.pattern: "filebeat-web-logger-*"
 setup.template.overwrite: true
 setup.template.fields: "custom.yml"
 
