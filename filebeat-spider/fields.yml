@@ -7,6 +7,9 @@
       type: text
       analyzer: ik_max_word
       search_analyzer: ik_smart
+      fields:
+        raw:
+          type: keyword
     - name: timestamp
       type: date
     - name: "@timestamp"
