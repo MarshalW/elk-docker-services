@@ -104,6 +104,7 @@ services:
         max-size: "1m"
         max-file: "10"
     volumes:
+      - ./filebeat-web-logger/ilm.json:/usr/share/filebeat/ilm.json:ro
       - ./filebeat-web-logger/fields.yml:/usr/share/filebeat/custom.yml:ro
       - ./filebeat-web-logger/config.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
