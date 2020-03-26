@@ -1,3 +1,5 @@
+from: 中国网
+section: 要闻
 urls:
   - http://news.china.com.cn/node_7247300.htm
 domainWhitelist:
@@ -24,5 +26,5 @@ rules:
       expression: //div[@id="articleBody"]
     - name: content # 正文
       expression: //div[@id="artiContent"]
-    - name: publishdate # 发布日期
-      expression: //meta[@name="publishdate"]/@content
+    # - name: publishdate # 发布日期
+    #   expression: //meta[@name="publishdate"]/@content
