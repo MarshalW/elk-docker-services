@@ -2,10 +2,7 @@ version: "3.7"
 
 services:
   elasticsearch:
-    build:
-      context: ./elasticsearch
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: marshalw/elasticsearch-customer-analyzer
     container_name: elasticsearch
     environment:
       ELASTIC_PASSWORD: $ELASTIC_PASSWORD

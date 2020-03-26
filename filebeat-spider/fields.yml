@@ -3,13 +3,23 @@
   description: >
     spider news item.
   fields:
-    - name: message.item.content
+    - name: message.item.title
       type: text
       analyzer: ik_max_word
       search_analyzer: ik_smart
       fields:
         raw:
-          type: keyword
+          type: keyword   
+    - name: message.item.content
+      type: text
+      analyzer: ik_max_word
+      search_analyzer: ik_smart
+    - name: message.item.html
+      type: text
+      analyzer: ik_max_word
+      search_analyzer: ik_smart
+    - name: message.item.publish_date
+      type: date
     - name: timestamp
       type: date
     - name: "@timestamp"
