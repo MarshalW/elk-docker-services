@@ -42,10 +42,9 @@ services:
     image: marshalw/spider-service
     container_name: spider
     volumes:
-      - ./spider/config.yml:/usr/src/app/config/spider.yml:ro
-      - ./spider/cache:/usr/service/app/cache
       - /etc/localtime:/etc/localtime:ro
-    command: ["*/20 * * * * /start.sh"]
+      - ./spider/config:/app/config:ro
+      - ./spider/cache:/app/cache
 
   filebeat_spider:
     image: docker.elastic.co/beats/filebeat:$ELK_VERSION

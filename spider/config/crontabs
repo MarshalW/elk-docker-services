@@ -1,0 +1,2 @@
+0 * * * * /app/spider.sh /app/config/world.china.com.cn.yml
+20 * * * * /app/spider.sh /app/config/highlights.china.com.cn.yml
