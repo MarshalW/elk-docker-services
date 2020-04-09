@@ -2,7 +2,7 @@ from: 中国网手机端
 section: 推荐
 cachePath: ./cache/中国网手机端-推荐
 jsonUrls:
-  - https://k1.m.china.com.cn/scene/query/list?columnId=3&page=0&size=20&appId=chinaApp
+  - https://k1.m.china.com.cn/scene/query/list?columnId=3&page=0&size=500&appId=chinaApp
 jsonPath: $.list[*].artUrl
 domainWhitelist:
   - m.china.com.cn
