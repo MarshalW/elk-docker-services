@@ -1,3 +1,4 @@
 0 * * * * /app/spider.sh /app/config/world.china.com.cn.yml
 20 * * * * /app/spider.sh /app/config/highlights.china.com.cn.yml
 40 * * * * /app/spider.sh /app/config/daily.gmw.cn.yml
+55 * * * * /app/spider.sh /app/config/recommend.m.china.yml

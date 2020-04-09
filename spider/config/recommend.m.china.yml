@@ -1,0 +1,33 @@
+from: 中国网手机端
+section: 推荐
+cachePath: ./cache/中国网手机端-推荐
+jsonUrls:
+  - https://k1.m.china.com.cn/scene/query/list?columnId=3&page=0&size=20&appId=chinaApp
+jsonPath: $.list[*].artUrl
+domainWhitelist:
+  - m.china.com.cn
+maxDepth: 1
+timeout: !!int 60000 #超时
+# interval: !!int 1500 #请求间隔
+maxConcurrency: 100 #同时的请求数
+logging:
+  level: debug
+respectRobotsTxt: false
+rules:
+  fetch:
+    - !!js/regexp ^\/appdoc\/doc_.* # 文章
+  parse:
+    - !!js/regexp ^\/appdoc\/doc_.* # 文章
+  item:
+    - name: title # 标题
+      expression: //div[@id="big-title"]/div[@class="text"]
+    - name: title # 标题
+      expression: //h1[@class="doctitle mainTitle"]
+    - name: content # 正文
+      expression: //div[@id="content"]
+    - name: content # 正文
+      expression: //div[@class="content contentBody"]
+    - name: publish_date # 发布日期
+      expression: //span[@id="pubtime"]/text()
+    - name: publish_date # 发布日期
+      expression: //span[@id="title_time"]/text()

@@ -45,6 +45,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./spider/config:/app/config:ro
       - ./spider/cache:/app/cache
+      - ./spider/http-cache/:/usr/src/app/cache
 
   filebeat_spider:
     image: docker.elastic.co/beats/filebeat:$ELK_VERSION
