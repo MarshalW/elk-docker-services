@@ -1,5 +1,6 @@
 from: 中国网
 section: 要闻
+cachePath: ./cache/中国网-要闻
 urls:
   - http://news.china.com.cn/node_7247300.htm
 domainWhitelist:

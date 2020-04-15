@@ -1,5 +1,6 @@
 from: 中国网
 section: 国际
+cachePath: ./cache/中国网-国际
 urls:
   - http://news.china.com.cn/world/node_7208703.htm
 domainWhitelist:

@@ -43,6 +43,7 @@ services:
   spider:
     image: marshalw/spider-service
     container_name: spider
+    user: ${CURRENT_UID}
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./spider/config:/app/config:ro
