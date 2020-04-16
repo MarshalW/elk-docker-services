@@ -9,7 +9,7 @@ output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
-  index: "filebeat-spider-%{[agent.version]}-%{+yyyy.MM.dd}"
+  index: "metricbeat-tank-%{[agent.version]}-%{+yyyy.MM.dd}"
 
 setup.kibana:
   host: "${KIBANA_HOST}"
