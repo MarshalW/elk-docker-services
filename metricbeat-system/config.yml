@@ -9,7 +9,7 @@ output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
-  index: "metricbeat-tank-%{[agent.version]}-%{+yyyy.MM.dd}"
+#   index: "metricbeat-tank-%{[agent.version]}-%{+yyyy.MM.dd}"
 
 setup.kibana:
   host: "${KIBANA_HOST}"
@@ -18,6 +18,6 @@ setup.kibana:
 
 setup.dashboards.enabled: true
 
-setup.template.name: "metricbeat-tank"
-setup.template.pattern: "metricbeat-tank-*"
-setup.template.overwrite: true
+# setup.template.name: "metricbeat-tank"
+# setup.template.pattern: "metricbeat-tank-*"
+# setup.template.overwrite: true
