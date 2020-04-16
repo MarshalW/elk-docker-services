@@ -1,0 +1,22 @@
+metricbeat.modules:
+  - module: system
+    metricsets: ["cpu", "memory", "network"]
+    enabled: true
+    period: 10s
+    processes: [".*"]
+
+output.elasticsearch:
+  hosts: "${ELASTICSEARCH_HOSTS}"
+  username: "${ELASTICSEARCH_USERNAME}"
+  password: "${ELASTICSEARCH_PASSWORD}"
+  index: "filebeat-spider-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+
+setup.dashboards.enabled: true
+
+setup.template.name: "metricbeat-tank"
+setup.template.pattern: "metricbeat-tank-*"

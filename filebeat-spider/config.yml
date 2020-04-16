@@ -35,13 +35,13 @@ setup.template.pattern: "filebeat-spider-*"
 setup.template.overwrite: true
 setup.template.fields: "custom.yml"
 
+setup.kibana:
+  host: "${KIBANA_HOST}"
+  username: ${ELASTICSEARCH_USERNAME}
+  password: ${ELASTICSEARCH_PASSWORD}
+
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
   index: "filebeat-spider-%{[agent.version]}-%{+yyyy.MM.dd}"
-
-setup.kibana:
-  host: "${KIBANA_HOST}"
-  username: ${ELASTICSEARCH_USERNAME}
-  password: ${ELASTICSEARCH_PASSWORD}

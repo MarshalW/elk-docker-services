@@ -122,6 +122,23 @@ services:
       - kibana
       - web_logger
 
+  metricbeat_system:
+    image: docker.elastic.co/beats/metricbeat:$ELK_VERSION
+    container_name: metricbeat-system
+    user: root
+    network_mode: "host"
+    volumes:
+      - ./metricbeat-system/config.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
+      - /proc:/hostfs/proc:ro
+      - /:/hostfs:ro
+    environment:
+      - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+    command: ["--strict.perms=false", "-system.hostfs=/hostfs"]
+
 networks:
   default:
     name: $DEFAULT_NETWORK
