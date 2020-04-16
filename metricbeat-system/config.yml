@@ -20,3 +20,4 @@ setup.dashboards.enabled: true
 
 setup.template.name: "metricbeat-tank"
 setup.template.pattern: "metricbeat-tank-*"
+setup.template.overwrite: true
