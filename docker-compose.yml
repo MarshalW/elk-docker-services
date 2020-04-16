@@ -66,6 +66,7 @@ services:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /etc/localtime:/etc/localtime:ro
+      - ./data:/usr/share/filebeat/data
     environment:
       ELASTICSEARCH_HOSTS: localhost:9200
       KIBANA_HOST: localhost:5601
