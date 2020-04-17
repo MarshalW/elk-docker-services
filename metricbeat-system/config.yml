@@ -1,6 +1,17 @@
+metricbeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
 metricbeat.modules:
   - module: system
-    metricsets: ["cpu", "memory", "network"]
+    metricsets:
+      - cpu
+      - load
+      - memory
+      - network
+      - process
+      - process_summary
+      - socket_summary
     enabled: true
     period: 10s
     processes: [".*"]
@@ -17,7 +28,6 @@ setup.kibana:
   password: ${ELASTICSEARCH_PASSWORD}
 
 setup.dashboards.enabled: true
-
 # setup.template.name: "metricbeat-tank"
 # setup.template.pattern: "metricbeat-tank-*"
 # setup.template.overwrite: true
