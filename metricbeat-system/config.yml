@@ -35,8 +35,11 @@ setup.kibana:
   password: ${ELASTICSEARCH_PASSWORD}
 
 setup.dashboards.enabled: true
+
 # setup.template.name: "metricbeat-tank"
 # setup.template.pattern: "metricbeat-tank-*"
 setup.template.overwrite: true
 # setup.template.settings:
 #   index.number_of_shards: 1
+
+monitoring.enabled: true
