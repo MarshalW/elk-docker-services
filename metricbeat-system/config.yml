@@ -43,3 +43,9 @@ setup.template.overwrite: true
 #   index.number_of_shards: 1
 
 monitoring.enabled: true
+
+setup.ilm:
+  enabled: true
+  rollover_alias: "metricbeat-tank"
+  pattern: "{now/d}-000001"
+  policy_file: "ilm.json"
