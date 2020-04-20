@@ -45,3 +45,5 @@ output.elasticsearch:
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
   index: "filebeat-spider-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+monitoring.enabled: true
