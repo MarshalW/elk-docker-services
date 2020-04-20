@@ -22,6 +22,7 @@ services:
         hard: 65536
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elasticsearch/config.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 9200:9200
