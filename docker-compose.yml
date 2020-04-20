@@ -40,8 +40,8 @@ services:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       ELASTICSEARCH_USERNAME: $ELASTIC_USER
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
-    depends_on:
-      - elasticsearch
+    # depends_on:
+    #   - elasticsearch
 
   spider:
     image: marshalw/spider-service
@@ -77,10 +77,10 @@ services:
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     command: ["--strict.perms=false", "-e"]
     restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-      - spider
+    # depends_on:
+    #   - elasticsearch
+    #   - kibana
+    #   - spider
 
   web_logger:
     container_name: web-logger
@@ -120,10 +120,10 @@ services:
       ELASTICSEARCH_PASSWORD: $ELASTIC_PASSWORD
     command: ["--strict.perms=false", "-e"]
     restart: on-failure
-    depends_on:
-      - elasticsearch
-      - kibana
-      - web_logger
+    # depends_on:
+    #   - elasticsearch
+    #   - kibana
+    #   - web_logger
 
   metricbeat_system:
     image: docker.elastic.co/beats/metricbeat:$ELK_VERSION

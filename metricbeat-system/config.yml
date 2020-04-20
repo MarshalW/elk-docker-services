@@ -37,7 +37,7 @@ metricbeat.modules:
     hosts: "${ELASTICSEARCH_HOSTS}"
     username: "${ELASTICSEARCH_USERNAME}"
     password: "${ELASTICSEARCH_PASSWORD}"
-    xpack.enabled: true
+    # xpack.enabled: true
 
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
