@@ -1,6 +1,6 @@
-metricbeat.config.modules:
-  path: ${path.config}/modules.d/*.yml
-  reload.enabled: false
+# metricbeat.config.modules:
+#   path: ${path.config}/modules.d/*.yml
+#   reload.enabled: false
 
 metricbeat.modules:
   - module: system
@@ -30,7 +30,7 @@ setup.kibana:
 setup.dashboards.enabled: true
 # setup.template.name: "metricbeat-tank"
 # setup.template.pattern: "metricbeat-tank-*"
-# setup.template.overwrite: true
+setup.template.overwrite: true
 
 setup.template.settings:
   index.number_of_shards: 1
