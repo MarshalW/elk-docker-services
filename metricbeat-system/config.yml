@@ -23,27 +23,11 @@ metricbeat.modules:
     period: 10s
     processes: [".*"]
 
-  - module: elasticsearch
-    metricsets:
-      - ccr
-      - cluster_stats
-      - index
-      - index_recovery
-      - index_summary
-      - ml_job
-      - node_stats
-      - shard
-    period: 10s
-    hosts: "${ELASTICSEARCH_HOSTS}"
-    username: "${ELASTICSEARCH_USERNAME}"
-    password: "${ELASTICSEARCH_PASSWORD}"
-    # xpack.enabled: true
-
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
   password: "${ELASTICSEARCH_PASSWORD}"
-#   index: "metricbeat-tank-%{[agent.version]}-%{+yyyy.MM.dd}"
+  index: "metricbeat-tank-%{[agent.version]}-%{+yyyy.MM.dd}"
 
 setup.kibana:
   host: "${KIBANA_HOST}"
@@ -52,8 +36,8 @@ setup.kibana:
 
 setup.dashboards.enabled: true
 
-# setup.template.name: "metricbeat-tank"
-# setup.template.pattern: "metricbeat-tank-*"
+setup.template.name: "metricbeat-tank"
+setup.template.pattern: "metricbeat-tank-*"
 setup.template.overwrite: true
 # setup.template.settings:
 #   index.number_of_shards: 1
