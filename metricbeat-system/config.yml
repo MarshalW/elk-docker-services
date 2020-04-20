@@ -23,6 +23,22 @@ metricbeat.modules:
     period: 10s
     processes: [".*"]
 
+  - module: elasticsearch
+    metricsets:
+      - ccr
+      - cluster_stats
+      - index
+      - index_recovery
+      - index_summary
+      - ml_job
+      - node_stats
+      - shard
+    period: 10s
+    hosts: "${ELASTICSEARCH_HOSTS}"
+    username: "${ELASTICSEARCH_USERNAME}"
+    password: "${ELASTICSEARCH_PASSWORD}"
+    xpack.enabled: true
+
 output.elasticsearch:
   hosts: "${ELASTICSEARCH_HOSTS}"
   username: "${ELASTICSEARCH_USERNAME}"
