@@ -11,7 +11,14 @@ metricbeat.modules:
       - network
       - process
       - process_summary
+      - uptime
       - socket_summary
+      - core
+      - diskio
+      - filesystem
+      - fsstat
+      - socket
+
     enabled: true
     period: 10s
     processes: [".*"]
@@ -31,6 +38,5 @@ setup.dashboards.enabled: true
 # setup.template.name: "metricbeat-tank"
 # setup.template.pattern: "metricbeat-tank-*"
 setup.template.overwrite: true
-
 # setup.template.settings:
 #   index.number_of_shards: 1
