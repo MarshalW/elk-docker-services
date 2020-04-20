@@ -11,7 +11,7 @@ services:
       TAKE_FILE_OWNERSHIP: "true"
       bootstrap.memory_lock: "true"
       ES_JAVA_OPTS: "-Xms16g -Xmx16g"
-      cluster.max_shards_per_node: 30000
+      # cluster.max_shards_per_node: 30000
       xpack.monitoring.collection.enabled: "true"
     ulimits:
       memlock:

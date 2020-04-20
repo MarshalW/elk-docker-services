@@ -2,3 +2,4 @@ cluster.name: "docker-cluster"
 network.host: 0.0.0.0
 
 xpack.monitoring.collection.enabled: true
+cluster.max_shards_per_node: 30000
