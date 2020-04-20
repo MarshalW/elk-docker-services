@@ -131,6 +131,7 @@ services:
     user: root
     network_mode: "host"
     volumes:
+      - ./metricbeat-system/ilm.json:/usr/share/metricbeat/ilm.json:ro
       - ./metricbeat-system/config.yml:/usr/share/metricbeat/metricbeat.yml:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /sys/fs/cgroup:/hostfs/sys/fs/cgroup:ro
