@@ -4,3 +4,7 @@ elasticsearch.hosts: ["$ELASTICSEARCH_HOSTS"]
 elasticsearch.username: $ELASTICSEARCH_USERNAME
 elasticsearch.password: $ELASTICSEARCH_PASSWORD
 # i18n.locale: "zh-CN"
+
+
+kibana.autocompleteTerminateAfter: 10000000
+kibana.autocompleteTimeout: 5000
