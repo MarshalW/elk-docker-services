@@ -1,5 +1,5 @@
-from: 光明网
-section: 光明日报
+from: !!str '光明网'
+section: !!str '光明日报'
 cachePath: ./cache/光明网-光明日报
 urls:
   - http://news.gmw.cn/node_4108.htm
